@@ -24,4 +24,10 @@
             android:layout_height="wrap_content" android:id="@+id/btnUpload"
             app:layout_constraintTop_toBottomOf="@+id/btnChange" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="160dp" android:layout_marginTop="8dp"/>
+    <Button
+            android:text="PDF READER"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:id="@+id/goAudio"
+            app:layout_constraintTop_toBottomOf="@+id/btnUpload"
+            android:layout_marginTop="60dp" app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="140dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

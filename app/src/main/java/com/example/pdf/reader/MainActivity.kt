@@ -1,5 +1,6 @@
 package com.example.pdf.reader
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var imgView: ImageView
     lateinit var btnChange: Button
     lateinit var btnUpload: Button
+    lateinit var btnGoPdfReader: Button
     lateinit var imageUri: Uri
 
     private val contract = registerForActivityResult(ActivityResultContracts.GetContent()) {
@@ -42,8 +44,13 @@ class MainActivity : AppCompatActivity() {
     private fun setup() {
         imgView = findViewById(R.id.imageView)
         btnChange = findViewById(R.id.btnChange)
-        btnChange.setOnClickListener { contract.launch("image/*") }
         btnUpload = findViewById(R.id.btnUpload)
+        btnGoPdfReader = findViewById(R.id.goAudio)
+
+        btnChange.setOnClickListener { contract.launch("image/*") }
+        btnGoPdfReader.setOnClickListener {
+            startActivity(Intent(this, PdfReader::class.java))
+        }
         btnUpload.setOnClickListener { upload() }
     }
 
@@ -56,10 +63,10 @@ class MainActivity : AppCompatActivity() {
         inputStream!!.copyTo(outputStream)
 
         val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
-        val part = MultipartBody.Part.createFormData("profile", file.name, requestBody)
+        val part = MultipartBody.Part.createFormData("audio_responses", file.name, requestBody)
 
         val retrofit =
-            Retrofit.Builder().baseUrl("http://192.168.30.92:8000/")
+            Retrofit.Builder().baseUrl("http://192.168.0.145:8000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(FileApi::class.java)
