@@ -66,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         val part = MultipartBody.Part.createFormData("audio_responses", file.name, requestBody)
 
         val retrofit =
-            Retrofit.Builder().baseUrl("http://192.168.0.145:8000/")
+            Retrofit.Builder().baseUrl("http://192.168.30.92:8000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(FileApi::class.java)

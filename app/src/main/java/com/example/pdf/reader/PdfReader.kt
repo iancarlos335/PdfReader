@@ -4,8 +4,10 @@ import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.widget.Button
 import android.widget.SeekBar
 import androidx.appcompat.app.AppCompatActivity
+import com.example.pdf.reader.download.AndroidDownloader
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class PdfReader : AppCompatActivity() {
@@ -23,6 +25,9 @@ class PdfReader : AppCompatActivity() {
         setContentView(R.layout.activity_pdf_reader)
 
         setup()
+
+        val downloader = AndroidDownloader(this)
+        downloader.downloadFile("http://192.168.30.92:8000/media/audio/audio_transcribed.mp3")
 
 
         controlSound(currentSong[0])
