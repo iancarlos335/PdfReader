@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         btnUpload = findViewById(R.id.btnUpload)
         btnGoPdfReader = findViewById(R.id.goAudio)
 
-        btnChange.setOnClickListener { contract.launch("image/*") }
+        btnChange.setOnClickListener { contract.launch("*/*") }
         btnGoPdfReader.setOnClickListener {
             startActivity(Intent(this, PdfReader::class.java))
         }
@@ -56,17 +56,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun upload() {
         val filesDir = applicationContext.filesDir
-        val file = File(filesDir, "image.png")
+        val file = File(filesDir, "file.pdf")
 
         val inputStream = contentResolver.openInputStream(imageUri)
         val outputStream = FileOutputStream(file)
         inputStream!!.copyTo(outputStream)
 
-        val requestBody = file.asRequestBody("image/*".toMediaTypeOrNull())
-        val part = MultipartBody.Part.createFormData("audio_responses", file.name, requestBody)
+        val requestBody = file.asRequestBody("*/*".toMediaTypeOrNull())
+        val part = MultipartBody.Part.createFormData("file", file.name, requestBody)
 
         val retrofit =
-            Retrofit.Builder().baseUrl("http://192.168.30.92:8000/")
+            Retrofit.Builder().baseUrl("http://192.168.0.36:8000/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(FileApi::class.java)

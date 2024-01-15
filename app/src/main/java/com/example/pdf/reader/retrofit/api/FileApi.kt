@@ -8,7 +8,7 @@ import retrofit2.http.Part
 
 interface FileApi {
 
-    @POST("/iaresponse/audio/")
+    @POST("/pdf-to-speech/pdf/")
     @Multipart
     suspend fun uploadPdf(
         @Part pdfDocument: MultipartBody.Part

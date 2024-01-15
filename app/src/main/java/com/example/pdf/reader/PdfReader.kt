@@ -17,6 +17,7 @@ class PdfReader : AppCompatActivity() {
     private lateinit var fabStop: FloatingActionButton
     private lateinit var fabPause: FloatingActionButton
     private lateinit var seekbar: SeekBar
+    private lateinit var btnDownload: Button
 
     private var currentSong = mutableListOf(R.raw.audio_transcribed)
 
@@ -25,11 +26,7 @@ class PdfReader : AppCompatActivity() {
         setContentView(R.layout.activity_pdf_reader)
 
         setup()
-
-        val downloader = AndroidDownloader(this)
-        downloader.downloadFile("http://192.168.30.92:8000/media/audio/audio_transcribed.mp3")
-
-
+        downloadAudio()
         controlSound(currentSong[0])
     }
 
@@ -78,6 +75,14 @@ class PdfReader : AppCompatActivity() {
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
             }
         })
+    }
+
+    private fun downloadAudio() {
+        btnDownload = findViewById(R.id.btnDownload)
+        btnDownload.setOnClickListener {
+            val downloader = AndroidDownloader(this)
+            downloader.downloadFile("http://192.168.0.36:8000/media/audio/audio_transcribed.mp3")
+        }
     }
 
     private fun initializeSeekBar() {
